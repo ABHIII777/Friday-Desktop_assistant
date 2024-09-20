@@ -2,7 +2,7 @@
 
 Inspired from previous project of EDITH. I created this awsome desktop assistant which does all tasks that a personal assistant should perform.
 
-# How to autostart on booring into windows
+# How to autostart on booting into windows
 
 Place the .bat file in startup folder. 
 -> To do the same press cmd + R
