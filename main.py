@@ -57,7 +57,8 @@ class ChatbotApp:
 
     def update_chat_log(self, message):
         self.chat_log.config(state='normal')
-        self.chat_log.insert(tk.END, message + "\n")
+        self.chat_log.insert(tk.END, message)
+        self.chat_log.insert(tk.END, "\n")
         self.chat_log.config(state='disabled')
         self.chat_log.yview(tk.END)  # Scroll to the end
 
@@ -101,9 +102,9 @@ class ChatbotApp:
             self.update_chat_log(f"Friday: An error {e} occured during the process.")
     
     def getAppList(self):
-        app_list = give_appnames()
+        app_list = set(give_appnames())
         self.say("Getting names of all applications")
-        self.update_chat_log(app_list)
+        self.update_chat_log(f"Friday: Here's list of all applications: {app_list}")
   
     def get_time(self):
         hour = datetime.datetime.now().hour 
