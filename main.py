@@ -157,6 +157,9 @@ class ChatbotApp:
                     self.say(f"An error {e} occured during the process")
                     self.update_chat_log(f"Friday: Error {e} occured.")
 
+            elif "get apps list" in user_message:
+                self.getAppList()
+
             elif "time" in user_message:
                 self.get_time()
 
