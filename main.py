@@ -137,6 +137,9 @@ class ChatbotApp:
 
             if "search " in user_message:
                 self.google_search(user_message)
+
+            elif "open github" in user_message:
+                web.open_new_tab("https://github.com/ABHIII777/")
                 
             elif "yt videos of " in user_message:
                 self.youtube_search(user_message)
