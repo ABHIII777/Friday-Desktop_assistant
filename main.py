@@ -64,8 +64,13 @@ class ChatbotApp:
         self.chat_log.config(state='disabled')
         self.chat_log.yview(tk.END)  # Scroll to the end
 
-    def youtubeDownloader():
-        pass
+    def youtubeDownloader(self, user_message):
+        video = YouTube(user_message, on_progress_callback=on_progress)
+        print(video.title)
+        self.ys = video.streams.get_highest_resolution()
+        self.ys.download(output_path='C:/Users/Abhi K Patel/Videos/Youtube/' , filename=f"{video.title}.mp4")
+        self.update_chat_log(f"Friday: Video Successfully downloaded")
+        self.say(f"The video is downloaded")
 
     def google_search(self, user_message):
         query = "" 
@@ -158,12 +163,7 @@ class ChatbotApp:
                 for i in range(16, len(user_message)):
                     query += user_message
                     
-                video = YouTube(query, on_progress_callback=on_progress)
-                print(video.title)
-                self.ys = video.streams.get_highest_resolution()
-                self.ys.download(output_path='C:/Users/Abhi K Patel/Videos/Youtube/' , filename=f"{video.title}.mp4")
-                self.update_chat_log(f"Friday: Video Successfully downloaded")
-                self.say(f"The video is downloaded")
+                self.youtubeDownloader(query)
             
             elif "change wallpaper" in user_message:
                 self.change_wallpaper()
