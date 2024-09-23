@@ -5,6 +5,8 @@ import subprocess, datetime
 import pyttsx3
 from AppOpener import *
 import speech_recognition as sp
+from pytubefix import YouTube
+from pytubefix.cli import on_progress
 
 class ChatbotApp:
     def __init__(self, root):
@@ -61,6 +63,9 @@ class ChatbotApp:
         self.chat_log.insert(tk.END, "\n")
         self.chat_log.config(state='disabled')
         self.chat_log.yview(tk.END)  # Scroll to the end
+
+    def youtubeDownloader():
+        pass
 
     def google_search(self, user_message):
         query = "" 
@@ -135,7 +140,10 @@ class ChatbotApp:
         
         if user_message not in responses:
 
-            if "search " in user_message:
+            if "all commands" in user_message:
+                self.update_chat_log("Friday: All possible command are: search for google search, open github, download video- for youtube video dwonload, yt videos of for searchin videos in youtube, change wallpaper, time, get apps list and open <AppName>")                
+            
+            elif "search " in user_message:
                 self.google_search(user_message)
 
             elif "open github" in user_message:
@@ -143,6 +151,19 @@ class ChatbotApp:
                 
             elif "yt videos of " in user_message:
                 self.youtube_search(user_message)
+
+            elif "download video- " in user_message:
+                query = ""
+
+                for i in range(16, len(user_message)):
+                    query += user_message
+                    
+                video = YouTube(query, on_progress_callback=on_progress)
+                print(video.title)
+                self.ys = video.streams.get_highest_resolution()
+                self.ys.download(output_path='C:/Users/Abhi K Patel/Videos/Youtube/' , filename=f"{video.title}.mp4")
+                self.update_chat_log(f"Friday: Video Successfully downloaded")
+                self.say(f"The video is downloaded")
             
             elif "change wallpaper" in user_message:
                 self.change_wallpaper()
